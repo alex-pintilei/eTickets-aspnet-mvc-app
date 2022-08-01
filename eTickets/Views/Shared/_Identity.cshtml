@@ -1,0 +1,49 @@
+﻿
+@inject UserManager<ApplicationUser> UserManager;
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <a class="btn btn-outline-success my-2 my-sm-0 DarkMode" asp-controller="Account" asp-action="Login">
+        <i class="bi bi-box-arrow-in-right DMText"></i> Log in
+    </a>
+
+    <div style="padding:5px;"></div> @* span -> div *@
+
+    <a class="btn btn-outline-primary my-2 my-sm-0 DarkMode" asp-controller="Account" asp-action="Register">
+        <i class="bi bi-person-plus DMText"></i> Register
+    </a> }
+else
+{
+    @*User profile Section*@
+    <div class="dropdown">
+        <button class="btn btn-outline-success dropdown-toggle DarkMode" type="button" id="profile-btn" data-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-badge"></i> Hello @UserManager.GetUserName(User)
+        </button>
+        <ul class="dropdown-menu DarkMode" aria-labelledby="profile-btn">
+            <li>
+                <a class="dropdown-item DMText" asp-controller="Orders" asp-action="Index">
+                    <i class="bi bi-list"></i> Orders
+                </a>
+            </li>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <li>
+                    <a class="dropdown-item DMText" asp-controller="Account" asp-action="Users">
+                        <i class="bi bi-people"></i> Users
+                    </a>
+                </li>
+            }
+
+        </ul>
+    </div>
+
+    <span style="padding:5px;"></span>
+    <form asp-controller="Account" asp-action="Logout">
+        <button class="btn btn-outline-danger my-2 my-sm-0 DarkModeLogout">
+            <i class="bi bi-box-arrow-in-right"></i> Log out
+        </button>
+    </form>
+}
+
+
