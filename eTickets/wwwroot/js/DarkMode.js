@@ -16,8 +16,8 @@ var superRemove = function (element, class0, class1, class2, class3) {
 // check for saved 'darkMode' in localStorage
 let darkMode = localStorage.getItem('darkMode');
 
-const darkModeToggle = document.querySelector('#dark-mode-toggle');
-console.log(darkModeToggle);
+const darkModeToggle = document.getElementById("dark-mode-toggle");
+//console.log(darkModeToggle);
 
 const enableDarkMode = () => {
     // 1. Add the class to the body
